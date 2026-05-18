@@ -1,13 +1,32 @@
+// File: manager.cpp
 #include "bank.h"
+#include<conio.h>
 
+//Password ko hide krne ke liya function (as *) banaya hai:
+string inputPassword(){
+    string password="";
+    char ch;
+    while((ch = _getch()) != '\r'){ // (ASCII 13) Read characters until Enter is pressed
+        if(ch == '\b'){ // Handle backspace  (ASCII 8)
+            if(!password.empty()){
+                password.pop_back();
+                cout << "\b \b"; // Erase the last character from the console
+            }
+        } else {
+            password += ch; // Append the character to the password string
+            cout << '*'; // Print an asterisk for each character entered
+        }
+    }
+    return password;   // ⭐ M
+}
 int main(){
     cout<<"Enter the manager's username: ";
     string username; 
      getline(cin, username); // Clear the newline character from the input buffer
     cout<<"Enter the manager's password: ";
-
-    string password;
-   getline(cin, password);
+    
+    string password = inputPassword(); // Read the password without echoing it
+    cout << endl; // Move to the next line after password input
 Manager m("Muhammad Abdullah", "1234") ;//
 Client c1("Duryab", "pass1", "33100", 1001, 5000.0); //three objects of the client class
 Client c2("Junaid", "pass2", "33101", 1002, 3000.0);
